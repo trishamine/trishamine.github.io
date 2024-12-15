@@ -17,23 +17,33 @@
             color: #333;
             margin-top: 50px;
         }
-        button {
+        .button {
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
-            background-color: #ff0000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 10px;
+            display: inline-block;
         }
-        button:hover {
+        .youtube {
+            background-color: #ff0000;
+        }
+        .youtube:hover {
             background-color: #cc0000;
+        }
+        .telegram {
+            background-color: #0088cc;
+        }
+        .telegram:hover {
+            background-color: #006699;
         }
     </style>
 </head>
 <body>
     <h1>Сайт @trishamine</h1>
-    <button onclick="window.open('https://youtube.com/@trishamine', '_blank')">YouTube</button>
+    <button class="button youtube" onclick="window.open('https://youtube.com/@trishamine', '_blank')">YouTube</button>
+    <button class="button telegram" onclick="window.open('https://t.me/trishamine', '_blank')">Telegram</button>
 </body>
 </html>

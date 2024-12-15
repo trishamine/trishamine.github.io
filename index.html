@@ -39,11 +39,58 @@
         .telegram:hover {
             background-color: #006699;
         }
+        .discord {
+            background-color: #5865F2;
+        }
+        .discord:hover {
+            background-color: #4A55CC;
+        }
+        .notification {
+            position: fixed;
+            bottom: -50px;
+            left: 5%;
+            right: 5%;
+            background-color: #000;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .notification.show {
+            bottom: 10px;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <h1>Сайт @trishamine</h1>
     <button class="button youtube" onclick="window.open('https://youtube.com/@trishamine', '_blank')">YouTube</button>
     <button class="button telegram" onclick="window.open('https://t.me/trishamine', '_blank')">Telegram</button>
+    <button class="button discord" onclick="copyToClipboard()">Discord</button>
+    
+    <div class="notification" id="notification">Никнейм скопирован в буфер обмена, нажмите CTRL+V, чтобы вставить</div>
+    
+    <script>
+        function copyToClipboard() {
+            // Копируем текст в буфер обмена
+            navigator.clipboard.writeText("mishaondiscor.d").then(() => {
+                // Показываем уведомление
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Прячем уведомление через 3 секунды
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+            });
+        }
+    </script>
 </body>
 </html>

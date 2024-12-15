@@ -92,6 +92,12 @@
                 console.error('Ошибка копирования: ', err);
             });
         }
+
+        // Проверка реферера
+        if (document.referrer.startsWith('https://download.trishamine.github.io')) {
+            // Перенаправление на основной сайт
+            window.location.href = 'https://trishamine.github.io';
+        }
     </script>
 </body>
 </html>

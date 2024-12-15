@@ -45,6 +45,12 @@
         .discord:hover {
             background-color: #4A55CC;
         }
+        .download {
+            background-color: #696969; /* Цвет для кнопок скачать */
+        }
+        .download:hover {
+            background-color: #555555;
+        }
         .notification {
             position: fixed;
             bottom: -50px;
@@ -73,8 +79,8 @@
     <button class="button telegram" onclick="window.open('https://t.me/trishamine', '_blank')">Telegram</button>
     <button class="button discord" onclick="copyToClipboard()">Discord</button>
     <button class="button discord" onclick="window.open('https://discord.gg/nK32dHQTyf', '_blank')">Discord Server</button>
-    <button class="button" onclick="window.location.href='trilauncher.exe'">Скачать лаунчер</button>
-    <button class="button" onclick="window.location.href='screenlockapp.zip'">Скачать программу дополнительной защиты пк</button>
+    <button class="button download" onclick="window.location.href='trilauncher.exe'">Скачать лаунчер</button>
+    <button class="button download" onclick="window.location.href='screenlockapp.zip'">Скачать программу дополнительной защиты пк</button>
 
     <div class="notification" id="notification">Никнейм скопирован в буфер обмена, нажмите CTRL+V, чтобы вставить</div>
 

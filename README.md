@@ -1,1 +1,2 @@
-# Сайт @trishamine, ссылка: https://trishamine.github.io/
+# Сайт @trishamine
+# https://trishamine.github.io/

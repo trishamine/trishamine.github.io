@@ -1,1 +1,1 @@
-# https://trishaminenytsubs.github.io
+# https://trishamine.github.io

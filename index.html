@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопки</title>
+    <style>
+        /* Общий стиль контейнера */
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        /* Базовый стиль кнопки */
+        .buttons button {
+            width: 150px;
+            height: 50px;
+            background-color: white;
+            margin: 20px;
+            color: #568fa6;
+            position: relative;
+            overflow: hidden;
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+
+        .buttons button:before, .buttons button:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+        }
+
+        .buttons button span {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        .buttons button span:before, .buttons button span:after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 0;
+            transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+        }
+
+        .buttons button p {
+            padding: 0;
+            margin: 0;
+            transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .buttons button p:before, .buttons button p:after {
+            position: absolute;
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+            z-index: 1;
+            left: 0;
+        }
+
+        .buttons button p:before {
+            content: attr(data-title);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .buttons button p:after {
+            content: attr(data-text);
+            top: 150%;
+            color: inherit;
+        }
+
+        .buttons button:hover:before, .buttons button:hover:after {
+            width: 100%;
+        }
+
+        .buttons button:hover span:before, .buttons button:hover span:after {
+            height: 100%;
+        }
+
+        .buttons button:hover p:before {
+            top: -50%;
+            transform: rotate(5deg);
+        }
+
+        .buttons button:hover p:after {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Цвета кнопок */
+        .buttons button.green { color: #44d8a4; }
+        .buttons button.green:before, .buttons button.green:after { background-color: #44d8a4; }
+        .buttons button.green span:before, .buttons button.green span:after { background-color: #44d8a4; }
+
+        .buttons button.blue { color: #4488d8; }
+        .buttons button.blue:before, .buttons button.blue:after { background-color: #4488d8; }
+        .buttons button.blue span:before, .buttons button.blue span:after { background-color: #4488d8; }
+
+        .buttons button.red { color: #d84444; }
+        .buttons button.red:before, .buttons button.red:after { background-color: #d84444; }
+        .buttons button.red span:before, .buttons button.red span:after { background-color: #d84444; }
+
+        .buttons button.purple { color: #8a44d8; }
+        .buttons button.purple:before, .buttons button.purple:after { background-color: #8a44d8; }
+        .buttons button.purple span:before, .buttons button.purple span:after { background-color: #8a44d8; }
+    </style>
+</head>
+<body>
+
+    <div class="buttons">
+        <button class="green"><span></span><p data-title="Кнопка 1" data-text="Зелёная"></p></button>
+        <button class="blue"><span></span><p data-title="Кнопка 2" data-text="Синяя"></p></button>
+        <button class="red"><span></span><p data-title="Кнопка 3" data-text="Красная"></p></button>
+        <button class="purple"><span></span><p data-title="Кнопка 4" data-text="Фиолетовая"></p></button>
+    </div>
+
+</body>
+</html>

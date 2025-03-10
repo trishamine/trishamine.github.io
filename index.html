@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кнопки</title>
+    <title>Кнопки со ссылками</title>
     <style>
-        /* Контейнер с кнопками */
         .buttons {
             display: flex;
             flex-wrap: wrap;
@@ -14,7 +13,6 @@
             margin-top: 50px;
         }
 
-        /* Базовый стиль кнопки */
         .cssbuttons-io-button {
             color: white;
             font-family: inherit;
@@ -65,7 +63,6 @@
             transform: scale(0.95);
         }
 
-        /* Цвета кнопок */
         .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
         .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
         .red .icon svg { color: #a94442; }
@@ -94,7 +91,7 @@
 <body>
 
     <div class="buttons">
-        <button class="cssbuttons-io-button red">
+        <button class="cssbuttons-io-button red" onclick="window.open('https://example.com/red', '_blank')">
             Красная
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +100,7 @@
             </div>
         </button>
 
-        <button class="cssbuttons-io-button dark-purple">
+        <button class="cssbuttons-io-button dark-purple" onclick="window.open('https://example.com/purple', '_blank')">
             Тёмно-фиолетовая
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +109,7 @@
             </div>
         </button>
 
-        <button class="cssbuttons-io-button blue">
+        <button class="cssbuttons-io-button blue" onclick="window.open('https://example.com/blue', '_blank')">
             Синяя
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +118,7 @@
             </div>
         </button>
 
-        <button class="cssbuttons-io-button light-blue">
+        <button class="cssbuttons-io-button light-blue" onclick="window.open('https://example.com/lightblue', '_blank')">
             Голубая
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +127,7 @@
             </div>
         </button>
 
-        <button class="cssbuttons-io-button gray">
+        <button class="cssbuttons-io-button gray" onclick="window.open('https://example.com/gray', '_blank')">
             Серая
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +136,7 @@
             </div>
         </button>
 
-        <button class="cssbuttons-io-button brown">
+        <button class="cssbuttons-io-button brown" onclick="window.open('https://example.com/brown', '_blank')">
             Коричневая
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

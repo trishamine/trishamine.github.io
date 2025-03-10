@@ -5,132 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кнопки</title>
     <style>
-        /* Общий стиль контейнера */
+        /* Контейнер с кнопками */
         .buttons {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
             margin-top: 50px;
         }
 
         /* Базовый стиль кнопки */
-        .buttons button {
-            width: 150px;
-            height: 50px;
-            background-color: white;
-            margin: 20px;
-            color: #568fa6;
-            position: relative;
-            overflow: hidden;
-            font-size: 14px;
-            letter-spacing: 1px;
+        .cssbuttons-io-button {
+            color: white;
+            font-family: inherit;
+            padding: 0.35em;
+            padding-left: 1.2em;
+            font-size: 17px;
             font-weight: 500;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            border-radius: 0.9em;
+            border: none;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            height: 2.8em;
+            padding-right: 3.3em;
             cursor: pointer;
-            border: 0;
+        }
+
+        .cssbuttons-io-button .icon {
+            background: white;
+            margin-left: 1em;
+            position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 3px;
+            height: 2.2em;
+            width: 2.2em;
+            border-radius: 0.7em;
+            right: 0.3em;
+            transition: all 0.3s;
         }
 
-        .buttons button:before, .buttons button:after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+        .cssbuttons-io-button:hover .icon {
+            width: calc(100% - 0.6em);
         }
 
-        .buttons button span {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 1;
+        .cssbuttons-io-button .icon svg {
+            width: 1.1em;
+            transition: transform 0.3s;
         }
 
-        .buttons button span:before, .buttons button span:after {
-            content: "";
-            position: absolute;
-            width: 2px;
-            height: 0;
-            transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+        .cssbuttons-io-button:hover .icon svg {
+            transform: translateX(0.1em);
         }
 
-        .buttons button p {
-            padding: 0;
-            margin: 0;
-            transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .buttons button p:before, .buttons button p:after {
-            position: absolute;
-            width: 100%;
-            transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
-            z-index: 1;
-            left: 0;
-        }
-
-        .buttons button p:before {
-            content: attr(data-title);
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .buttons button p:after {
-            content: attr(data-text);
-            top: 150%;
-            color: inherit;
-        }
-
-        .buttons button:hover:before, .buttons button:hover:after {
-            width: 100%;
-        }
-
-        .buttons button:hover span:before, .buttons button:hover span:after {
-            height: 100%;
-        }
-
-        .buttons button:hover p:before {
-            top: -50%;
-            transform: rotate(5deg);
-        }
-
-        .buttons button:hover p:after {
-            top: 50%;
-            transform: translateY(-50%);
+        .cssbuttons-io-button:active .icon {
+            transform: scale(0.95);
         }
 
         /* Цвета кнопок */
-        .buttons button.green { color: #44d8a4; }
-        .buttons button.green:before, .buttons button.green:after { background-color: #44d8a4; }
-        .buttons button.green span:before, .buttons button.green span:after { background-color: #44d8a4; }
+        .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
+        .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
+        .red .icon svg { color: #a94442; }
 
-        .buttons button.blue { color: #4488d8; }
-        .buttons button.blue:before, .buttons button.blue:after { background-color: #4488d8; }
-        .buttons button.blue span:before, .buttons button.blue span:after { background-color: #4488d8; }
+        .dark-purple { background: #6a0dad; box-shadow: inset 0 0 1.6em -0.6em #4b0082; }
+        .dark-purple .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #4b0082; }
+        .dark-purple .icon svg { color: #4b0082; }
 
-        .buttons button.red { color: #d84444; }
-        .buttons button.red:before, .buttons button.red:after { background-color: #d84444; }
-        .buttons button.red span:before, .buttons button.red span:after { background-color: #d84444; }
+        .blue { background: #007bff; box-shadow: inset 0 0 1.6em -0.6em #0056b3; }
+        .blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #0056b3; }
+        .blue .icon svg { color: #0056b3; }
 
-        .buttons button.purple { color: #8a44d8; }
-        .buttons button.purple:before, .buttons button.purple:after { background-color: #8a44d8; }
-        .buttons button.purple span:before, .buttons button.purple span:after { background-color: #8a44d8; }
+        .light-blue { background: #5bc0de; box-shadow: inset 0 0 1.6em -0.6em #31b0d5; }
+        .light-blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #31b0d5; }
+        .light-blue .icon svg { color: #31b0d5; }
+
+        .gray { background: #6c757d; box-shadow: inset 0 0 1.6em -0.6em #545b62; }
+        .gray .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #545b62; }
+        .gray .icon svg { color: #545b62; }
+
+        .brown { background: #8b4513; box-shadow: inset 0 0 1.6em -0.6em #5a2c0d; }
+        .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
+        .brown .icon svg { color: #5a2c0d; }
     </style>
 </head>
 <body>
 
     <div class="buttons">
-        <button class="green"><span></span><p data-title="Кнопка 1" data-text="Зелёная"></p></button>
-        <button class="blue"><span></span><p data-title="Кнопка 2" data-text="Синяя"></p></button>
-        <button class="red"><span></span><p data-title="Кнопка 3" data-text="Красная"></p></button>
-        <button class="purple"><span></span><p data-title="Кнопка 4" data-text="Фиолетовая"></p></button>
+        <button class="cssbuttons-io-button red">
+            Красная
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button dark-purple">
+            Тёмно-фиолетовая
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button blue">
+            Синяя
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button light-blue">
+            Голубая
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button gray">
+            Серая
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button brown">
+            Коричневая
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
     </div>
 
 </body>

@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Стили для кнопок */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .buttons {
             display: flex;
             flex-wrap: wrap;
@@ -68,7 +72,6 @@
             transform: scale(0.95);
         }
 
-        /* Стили для кнопок с цветами */
         .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
         .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
         .red .icon svg { color: #a94442; }
@@ -93,7 +96,6 @@
         .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
         .brown .icon svg { color: #5a2c0d; }
 
-        /* Стили для блока новостей */
         .news-text {
             width: 100%;
             text-align: center;
@@ -107,9 +109,11 @@
         }
 
         .news-text img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 15px;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 100px;
         }
     </style>
 </head>
@@ -171,17 +175,22 @@
         </button>
     </div>
 
-    <div class="news-text">
-        <img src="/newspic.png" alt="Новости">
-        <pre id="news-text">Загрузка новостей...</pre>
+    <div class="news-text" id="news-text">
+        <img src="/newspic.png" alt="News Image">
+        Загрузка новостей...
     </div>
 
     <script>
+        function parseMarkdown(text) {
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            return text;
+        }
+
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
-                // Заменить символы новой строки на <br>
-                const formattedText = data.replace(/\n/g, '<br>');
+                const formattedText = parseMarkdown(data);
                 document.getElementById('news-text').innerHTML = formattedText;
             })
             .catch(error => {

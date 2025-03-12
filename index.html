@@ -63,29 +63,29 @@
             transform: scale(0.95);
         }
 
-        .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
-        .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
-        .red .icon svg { color: #a94442; }
+        .news-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
 
-        .dark-purple { background: #6a0dad; box-shadow: inset 0 0 1.6em -0.6em #4b0082; }
-        .dark-purple .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #4b0082; }
-        .dark-purple .icon svg { color: #4b0082; }
+        .news-box {
+            width: 80%;
+            max-width: 600px;
+        }
 
-        .blue { background: #007bff; box-shadow: inset 0 0 1.6em -0.6em #0056b3; }
-        .blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #0056b3; }
-        .blue .icon svg { color: #0056b3; }
-
-        .light-blue { background: #5bc0de; box-shadow: inset 0 0 1.6em -0.6em #31b0d5; }
-        .light-blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #31b0d5; }
-        .light-blue .icon svg { color: #31b0d5; }
-
-        .gray { background: #6c757d; box-shadow: inset 0 0 1.6em -0.6em #545b62; }
-        .gray .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #545b62; }
-        .gray .icon svg { color: #545b62; }
-
-        .brown { background: #8b4513; box-shadow: inset 0 0 1.6em -0.6em #5a2c0d; }
-        .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
-        .brown .icon svg { color: #5a2c0d; }
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: none;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -117,34 +117,25 @@
                 </svg>
             </div>
         </button>
-
-        <button class="cssbuttons-io-button light-blue" onclick="window.open('https://trishamine.github.io/ttgchannel.html', '_blank')">
-            Телеграм канал
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button gray" onclick="alert('Triworld Лаунчер находится в разработке!')">
-            Triworld Лаунчер (В разработке)
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button brown" onclick="alert('Triworld SMP находится на техничетских работах, и будет доступен через 2-3 дня после выхода версии майнкрафта 1.21.5!')">
-            Triworld SMP (Тех. работы)
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
     </div>
+
+    <div class="news-container">
+        <div class="news-box">
+            <textarea id="news" readonly>Загрузка новостей...</textarea>
+        </div>
+    </div>
+
+    <script>
+        fetch('/news.txt')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('news').textContent = data;
+            })
+            .catch(error => {
+                document.getElementById('news').textContent = 'Ошибка загрузки новостей.';
+                console.error('Ошибка загрузки файла news.txt:', error);
+            });
+    </script>
 
 </body>
 </html>

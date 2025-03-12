@@ -14,10 +14,11 @@
         }
 
         .cssbuttons-io-button {
+            position: relative;
+            z-index: 1;
             color: white;
             font-family: inherit;
-            padding: 0.35em;
-            padding-left: 1.2em;
+            padding: 0.35em 1.2em;
             font-size: 17px;
             font-weight: 500;
             border-radius: 0.9em;
@@ -26,23 +27,26 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            position: relative;
             height: 2.8em;
-            padding-right: 3.3em;
             cursor: pointer;
+            background: transparent;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .cssbuttons-io-button:hover {
+            opacity: 1 !important;
         }
 
         .cssbuttons-io-button .icon {
             background: white;
-            margin-left: 1em;
             position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            right: 0.3em;
             height: 2.2em;
             width: 2.2em;
             border-radius: 0.7em;
-            right: 0.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s;
         }
 
@@ -63,28 +67,39 @@
             transform: scale(0.95);
         }
 
-        .news-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-        }
+        .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
+        .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
+        .red .icon svg { color: #a94442; }
 
-        .news-box {
-            width: 80%;
-            max-width: 600px;
-        }
+        .dark-purple { background: #6a0dad; box-shadow: inset 0 0 1.6em -0.6em #4b0082; }
+        .dark-purple .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #4b0082; }
+        .dark-purple .icon svg { color: #4b0082; }
 
-        textarea {
+        .blue { background: #007bff; box-shadow: inset 0 0 1.6em -0.6em #0056b3; }
+        .blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #0056b3; }
+        .blue .icon svg { color: #0056b3; }
+
+        .light-blue { background: #5bc0de; box-shadow: inset 0 0 1.6em -0.6em #31b0d5; }
+        .light-blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #31b0d5; }
+        .light-blue .icon svg { color: #31b0d5; }
+
+        .gray { background: #6c757d; box-shadow: inset 0 0 1.6em -0.6em #545b62; }
+        .gray .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #545b62; }
+        .gray .icon svg { color: #545b62; }
+
+        .brown { background: #8b4513; box-shadow: inset 0 0 1.6em -0.6em #5a2c0d; }
+        .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
+        .brown .icon svg { color: #5a2c0d; }
+
+        .news-text {
             width: 100%;
-            height: 100px;
-            resize: none;
-            font-size: 16px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #f9f9f9;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.2em;
             color: #333;
-            font-family: Arial, sans-serif;
+            padding: 1em;
+            background: #f9f9f9;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
@@ -117,23 +132,48 @@
                 </svg>
             </div>
         </button>
+
+        <button class="cssbuttons-io-button light-blue" onclick="window.open('https://trishamine.github.io/ttgchannel.html', '_blank')">
+            Телеграм канал
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button gray" onclick="alert('Triworld Лаунчер находится в разработке!')">
+            Triworld Лаунчер (В разработке)
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button brown" onclick="alert('Triworld SMP находится на техничетских работах, и будет доступен через 2-3 дня после выхода версии майнкрафта 1.21.5!')">
+            Triworld SMP (Тех. работы)
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
     </div>
 
-    <div class="news-container">
-        <div class="news-box">
-            <textarea id="news" readonly>Загрузка новостей...</textarea>
-        </div>
+    <div class="news-text" id="news-text">
+        Загрузка новостей...
     </div>
 
     <script>
         fetch('/news.txt')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('news').textContent = data;
+                document.getElementById('news-text').textContent = data;
             })
             .catch(error => {
-                document.getElementById('news').textContent = 'Ошибка загрузки новостей.';
-                console.error('Ошибка загрузки файла news.txt:', error);
+                console.error('Ошибка загрузки новости:', error);
+                document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
             });
     </script>
 

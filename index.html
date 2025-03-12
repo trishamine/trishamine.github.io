@@ -166,10 +166,12 @@
     </div>
 
     <script>
-        fetch('/news.txt?' + new Date().getTime())
+        fetch('/news.txt')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('news-text').textContent = data;
+                // Заменить символы новой строки на <br>
+                const formattedText = data.replace(/\n/g, '<br>');
+                document.getElementById('news-text').innerHTML = formattedText;
             })
             .catch(error => {
                 console.error('Ошибка загрузки новости:', error);

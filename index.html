@@ -5,49 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            margin-top: 50px;
-        }
-
         .buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             margin-top: 50px;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 300px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .auth-form input {
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        .auth-form button {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .hidden {
-            display: none;
         }
 
         .cssbuttons-io-button {
@@ -100,103 +63,88 @@
             transform: scale(0.95);
         }
 
-        .red { background: #d9534f; }
-        .dark-purple { background: #6a0dad; }
-        .blue { background: #007bff; }
-        .light-blue { background: #5bc0de; }
-        .gray { background: #6c757d; }
-        .brown { background: #8b4513; }
+        .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
+        .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
+        .red .icon svg { color: #a94442; }
+
+        .dark-purple { background: #6a0dad; box-shadow: inset 0 0 1.6em -0.6em #4b0082; }
+        .dark-purple .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #4b0082; }
+        .dark-purple .icon svg { color: #4b0082; }
+
+        .blue { background: #007bff; box-shadow: inset 0 0 1.6em -0.6em #0056b3; }
+        .blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #0056b3; }
+        .blue .icon svg { color: #0056b3; }
+
+        .light-blue { background: #5bc0de; box-shadow: inset 0 0 1.6em -0.6em #31b0d5; }
+        .light-blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #31b0d5; }
+        .light-blue .icon svg { color: #31b0d5; }
+
+        .gray { background: #6c757d; box-shadow: inset 0 0 1.6em -0.6em #545b62; }
+        .gray .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #545b62; }
+        .gray .icon svg { color: #545b62; }
+
+        .brown { background: #8b4513; box-shadow: inset 0 0 1.6em -0.6em #5a2c0d; }
+        .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
+        .brown .icon svg { color: #5a2c0d; }
     </style>
 </head>
 <body>
 
-    <div id="auth-container" class="container">
-        <form class="auth-form" id="auth-form">
-            <h2>Авторизация</h2>
-            <input type="text" id="username" placeholder="Логин" required>
-            <input type="password" id="password" placeholder="Пароль" required>
-            <button type="button" onclick="login()">Войти</button>
-            <button type="button" onclick="register()">Регистрация</button>
-        </form>
+    <div class="buttons">
+        <button class="cssbuttons-io-button red" onclick="window.open('https://trishamine.github.io/tytsub.html', '_blank')">
+            Ютуб
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button dark-purple" onclick="window.open('https://trishamine.github.io/tttsub.html', '_blank')">
+            Тикток
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button blue" onclick="window.open('https://trishamine.github.io/tdssrv.html', '_blank')">
+            Дискорд сервер
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button light-blue" onclick="window.open('https://trishamine.github.io/ttgchannel.html', '_blank')">
+            Телеграм канал
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button gray" onclick="alert('Triworld Лаунчер находится в разработке!')">
+            Triworld Лаунчер (В разработке)
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+
+        <button class="cssbuttons-io-button brown" onclick="alert('Triworld SMP находится на техничетских работах, и будет доступен через 2-3 дня после выхода версии майнкрафта 1.21.5!')">
+            Triworld SMP (Тех. работы)
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
     </div>
-
-    <div id="main-content" class="hidden">
-        <h2>Добро пожаловать!</h2>
-        <button onclick="logout()">Выйти</button>
-
-        <div class="buttons">
-            <button class="cssbuttons-io-button red" onclick="window.open('https://trishamine.github.io/tytsub.html', '_blank')">
-                Ютуб
-                <div class="icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </button>
-
-            <button class="cssbuttons-io-button dark-purple" onclick="window.open('https://trishamine.github.io/tttsub.html', '_blank')">
-                Тикток
-                <div class="icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </button>
-
-            <button class="cssbuttons-io-button blue" onclick="window.open('https://trishamine.github.io/tdssrv.html', '_blank')">
-                Дискорд сервер
-                <div class="icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (localStorage.getItem("loggedInUser")) {
-                showMainContent();
-            }
-        });
-
-        function login() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            const storedPassword = localStorage.getItem(username);
-            if (storedPassword === password) {
-                localStorage.setItem("loggedInUser", username);
-                showMainContent();
-            } else {
-                alert("Неправильный логин или пароль");
-            }
-        }
-
-        function register() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            if (localStorage.getItem(username)) {
-                alert("Такой пользователь уже существует!");
-            } else {
-                localStorage.setItem(username, password);
-                alert("Регистрация успешна! Теперь войдите.");
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem("loggedInUser");
-            document.getElementById("main-content").classList.add("hidden");
-            document.getElementById("auth-container").classList.remove("hidden");
-        }
-
-        function showMainContent() {
-            document.getElementById("auth-container").classList.add("hidden");
-            document.getElementById("main-content").classList.remove("hidden");
-        }
-    </script>
 
 </body>
 </html>

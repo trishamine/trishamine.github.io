@@ -173,7 +173,7 @@
     </div>
 
     <script>
-        fetch('/news.txt')
+        fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
                 // Заменить символы новой строки на <br>

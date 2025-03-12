@@ -166,7 +166,7 @@
     </div>
 
     <script>
-        fetch('/news.txt')
+        fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
                 document.getElementById('news-text').textContent = data;

@@ -20,43 +20,34 @@
             right: 0;
             z-index: 1000;
         }
-        .user-info {
-            font-size: 18px;
-        }
         .auth-buttons button {
             margin-left: 10px;
             padding: 5px 10px;
             cursor: pointer;
         }
-        /* Стили для popup */
-        .popup {
+        /* Стили для редактируемого блока */
+        #editable-container {
+            margin-top: 80px;
+            padding: 20px;
+            border: 2px dashed gray;
+            min-height: 150px;
+            text-align: center;
+        }
+        #editable-container img {
+            max-width: 100%;
+            max-height: 200px;
+        }
+        /* Кнопка сохранения */
+        #save-button {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        }
-        .popup input {
-            display: block;
-            margin: 10px 0;
-            width: 100%;
-            padding: 8px;
-        }
-        .popup button {
-            width: 100%;
+            top: 10px;
+            right: 10px;
             padding: 10px;
-            background: #007bff;
+            background: green;
             color: white;
+            cursor: pointer;
             border: none;
-            cursor: pointer;
-        }
-        .popup-close {
-            text-align: right;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -70,39 +61,18 @@
             <button onclick="showPopup('register-popup')">Регистрация</button>
             <button onclick="logout()" style="display: none;">Выйти</button>
             <button onclick="showPopup('change-password-popup')" style="display: none;">Сменить пароль</button>
+            <button id="save-button" onclick="saveContent()">Сохранить</button>
         </div>
     </div>
 
-    <!-- Popup для входа -->
-    <div id="login-popup" class="popup">
-        <div class="popup-close" onclick="closePopup('login-popup')">✖</div>
-        <h3>Вход</h3>
-        <input type="text" id="login-username" placeholder="Имя пользователя">
-        <input type="password" id="login-password" placeholder="Пароль">
-        <button onclick="login()">Войти</button>
-    </div>
-
-    <!-- Popup для регистрации -->
-    <div id="register-popup" class="popup">
-        <div class="popup-close" onclick="closePopup('register-popup')">✖</div>
-        <h3>Регистрация</h3>
-        <input type="text" id="register-username" placeholder="Имя пользователя">
-        <input type="password" id="register-password" placeholder="Пароль">
-        <input type="password" id="register-password-confirm" placeholder="Повторите пароль">
-        <button onclick="register()">Зарегистрироваться</button>
-    </div>
-
-    <!-- Popup для смены пароля -->
-    <div id="change-password-popup" class="popup">
-        <div class="popup-close" onclick="closePopup('change-password-popup')">✖</div>
-        <h3>Смена пароля</h3>
-        <input type="password" id="old-password" placeholder="Старый пароль">
-        <input type="password" id="new-password" placeholder="Новый пароль">
-        <button onclick="changePassword()">Сменить</button>
+    <!-- Поле для редактирования -->
+    <div id="editable-container" contenteditable="false" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
+        <p>Перетащите сюда изображение или текст</p>
     </div>
 
     <script>
-        const SECRET_KEY = "my_secret_key"; // Ключ для шифрования
+        const SECRET_KEY = "my_secret_key";
+        const ADMIN_USER = "5zc8734t6zt856tzc83427b6trriw3r23ut0845uhtv7trhv56znvt9z8ß7qz904t8758te56wbueutwuew4r85uctz0rui09r1285rmcx90m23t90uf5rrmz492mu8fzm824z5ju";
 
         function encrypt(text) {
             return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
@@ -124,32 +94,9 @@
             document.getElementById(id).style.display = "none";
         }
 
-        function register() {
-            let username = document.getElementById("register-username").value;
-            let password = document.getElementById("register-password").value;
-            let confirmPassword = document.getElementById("register-password-confirm").value;
-
-            if (password !== confirmPassword) {
-                alert("Пароли не совпадают!");
-                return;
-            }
-
-            let users = JSON.parse(localStorage.getItem("users") || "{}");
-            if (users[username]) {
-                alert("Пользователь уже существует!");
-                return;
-            }
-
-            users[username] = encrypt(password);
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("Регистрация успешна!");
-            closePopup("register-popup");
-        }
-
         function login() {
-            let username = document.getElementById("login-username").value;
-            let password = document.getElementById("login-password").value;
+            let username = prompt("Введите имя пользователя:");
+            let password = prompt("Введите пароль:");
 
             let users = JSON.parse(localStorage.getItem("users") || "{}");
             if (!users[username] || decrypt(users[username]) !== password) {
@@ -159,7 +106,6 @@
 
             localStorage.setItem("loggedUser", username);
             updateUI();
-            closePopup("login-popup");
         }
 
         function logout() {
@@ -167,46 +113,53 @@
             updateUI();
         }
 
-        function changePassword() {
-            let oldPassword = document.getElementById("old-password").value;
-            let newPassword = document.getElementById("new-password").value;
-
-            let username = localStorage.getItem("loggedUser");
-            if (!username) return alert("Вы не авторизованы!");
-
-            let users = JSON.parse(localStorage.getItem("users") || "{}");
-            if (decrypt(users[username]) !== oldPassword) {
-                alert("Старый пароль неверен!");
-                return;
-            }
-
-            users[username] = encrypt(newPassword);
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("Пароль успешно изменен!");
-            closePopup("change-password-popup");
-        }
-
         function updateUI() {
             let username = localStorage.getItem("loggedUser");
             let userInfo = document.querySelector(".user-info");
-            let loginBtn = document.querySelector(".auth-buttons button:nth-child(1)");
-            let registerBtn = document.querySelector(".auth-buttons button:nth-child(2)");
-            let logoutBtn = document.querySelector(".auth-buttons button:nth-child(3)");
-            let changePasswordBtn = document.querySelector(".auth-buttons button:nth-child(4)");
+            let saveButton = document.getElementById("save-button");
+            let editableContainer = document.getElementById("editable-container");
 
             if (username) {
                 userInfo.textContent = `Вы вошли как ${username}`;
-                loginBtn.style.display = "none";
-                registerBtn.style.display = "none";
-                logoutBtn.style.display = "inline-block";
-                changePasswordBtn.style.display = "inline-block";
+                if (username === ADMIN_USER) {
+                    editableContainer.contentEditable = "true";
+                    saveButton.style.display = "block";
+                } else {
+                    editableContainer.contentEditable = "false";
+                    saveButton.style.display = "none";
+                }
             } else {
                 userInfo.textContent = "Гость";
-                loginBtn.style.display = "inline-block";
-                registerBtn.style.display = "inline-block";
-                logoutBtn.style.display = "none";
-                changePasswordBtn.style.display = "none";
+                editableContainer.contentEditable = "false";
+                saveButton.style.display = "none";
+            }
+
+            // Загружаем сохранённый контент
+            let savedContent = localStorage.getItem("editableContent");
+            if (savedContent) {
+                editableContainer.innerHTML = savedContent;
+            }
+        }
+
+        function saveContent() {
+            let editableContainer = document.getElementById("editable-container");
+            localStorage.setItem("editableContent", editableContainer.innerHTML);
+            alert("Сохранено!");
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            let files = event.dataTransfer.files;
+            if (files.length > 0) {
+                let file = files[0];
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let img = document.createElement("img");
+                    img.src = e.target.result;
+                    document.getElementById("editable-container").appendChild(img);
+                    saveContent();
+                };
+                reader.readAsDataURL(file);
             }
         }
 

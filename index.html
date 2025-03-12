@@ -4,166 +4,198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
-        /* Стили для верхней панели */
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background: #333;
-            color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        .auth-buttons button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        /* Стили для редактируемого блока */
-        #editable-container {
-            margin-top: 80px;
-            padding: 20px;
-            border: 2px dashed gray;
-            min-height: 150px;
+        body {
+            font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
-        #editable-container img {
-            max-width: 100%;
-            max-height: 200px;
+
+        .container {
+            margin-top: 50px;
         }
-        /* Кнопка сохранения */
-        #save-button {
-            display: none;
-            position: fixed;
-            top: 10px;
-            right: 10px;
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .auth-form input {
             padding: 10px;
-            background: green;
-            color: white;
-            cursor: pointer;
-            border: none;
+            font-size: 16px;
         }
+
+        .auth-form button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .cssbuttons-io-button {
+            color: white;
+            font-family: inherit;
+            padding: 0.35em;
+            padding-left: 1.2em;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 0.9em;
+            border: none;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            height: 2.8em;
+            padding-right: 3.3em;
+            cursor: pointer;
+        }
+
+        .cssbuttons-io-button .icon {
+            background: white;
+            margin-left: 1em;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 2.2em;
+            width: 2.2em;
+            border-radius: 0.7em;
+            right: 0.3em;
+            transition: all 0.3s;
+        }
+
+        .cssbuttons-io-button:hover .icon {
+            width: calc(100% - 0.6em);
+        }
+
+        .cssbuttons-io-button .icon svg {
+            width: 1.1em;
+            transition: transform 0.3s;
+        }
+
+        .cssbuttons-io-button:hover .icon svg {
+            transform: translateX(0.1em);
+        }
+
+        .cssbuttons-io-button:active .icon {
+            transform: scale(0.95);
+        }
+
+        .red { background: #d9534f; }
+        .dark-purple { background: #6a0dad; }
+        .blue { background: #007bff; }
+        .light-blue { background: #5bc0de; }
+        .gray { background: #6c757d; }
+        .brown { background: #8b4513; }
     </style>
 </head>
 <body>
 
-    <!-- Верхняя панель -->
-    <div class="top-bar">
-        <div class="user-info">Гость</div>
-        <div class="auth-buttons">
-            <button onclick="showPopup('login-popup')">Войти</button>
-            <button onclick="showPopup('register-popup')">Регистрация</button>
-            <button onclick="logout()" style="display: none;">Выйти</button>
-            <button onclick="showPopup('change-password-popup')" style="display: none;">Сменить пароль</button>
-            <button id="save-button" onclick="saveContent()">Сохранить</button>
+    <div id="auth-container" class="container">
+        <form class="auth-form" id="auth-form">
+            <h2>Авторизация</h2>
+            <input type="text" id="username" placeholder="Логин" required>
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button type="button" onclick="login()">Войти</button>
+            <button type="button" onclick="register()">Регистрация</button>
+        </form>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <h2>Добро пожаловать!</h2>
+        <button onclick="logout()">Выйти</button>
+
+        <div class="buttons">
+            <button class="cssbuttons-io-button red" onclick="window.open('https://trishamine.github.io/tytsub.html', '_blank')">
+                Ютуб
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </button>
+
+            <button class="cssbuttons-io-button dark-purple" onclick="window.open('https://trishamine.github.io/tttsub.html', '_blank')">
+                Тикток
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </button>
+
+            <button class="cssbuttons-io-button blue" onclick="window.open('https://trishamine.github.io/tdssrv.html', '_blank')">
+                Дискорд сервер
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </button>
         </div>
     </div>
 
-    <!-- Поле для редактирования -->
-    <div id="editable-container" contenteditable="false" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
-        <p>Перетащите сюда изображение или текст</p>
-    </div>
-
     <script>
-        const SECRET_KEY = "my_secret_key";
-        const ADMIN_USER = "5zc8734t6zt856tzc83427b6trriw3r23ut0845uhtv7trhv56znvt9z8ß7qz904t8758te56wbueutwuew4r85uctz0rui09r1285rmcx90m23t90uf5rrmz492mu8fzm824z5ju";
-
-        function encrypt(text) {
-            return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
-        }
-
-        function decrypt(text) {
-            try {
-                return CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8);
-            } catch {
-                return null;
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("loggedInUser")) {
+                showMainContent();
             }
-        }
-
-        function showPopup(id) {
-            document.getElementById(id).style.display = "block";
-        }
-
-        function closePopup(id) {
-            document.getElementById(id).style.display = "none";
-        }
+        });
 
         function login() {
-            let username = prompt("Введите имя пользователя:");
-            let password = prompt("Введите пароль:");
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-            let users = JSON.parse(localStorage.getItem("users") || "{}");
-            if (!users[username] || decrypt(users[username]) !== password) {
-                alert("Неверное имя пользователя или пароль!");
-                return;
+            const storedPassword = localStorage.getItem(username);
+            if (storedPassword === password) {
+                localStorage.setItem("loggedInUser", username);
+                showMainContent();
+            } else {
+                alert("Неправильный логин или пароль");
             }
+        }
 
-            localStorage.setItem("loggedUser", username);
-            updateUI();
+        function register() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (localStorage.getItem(username)) {
+                alert("Такой пользователь уже существует!");
+            } else {
+                localStorage.setItem(username, password);
+                alert("Регистрация успешна! Теперь войдите.");
+            }
         }
 
         function logout() {
-            localStorage.removeItem("loggedUser");
-            updateUI();
+            localStorage.removeItem("loggedInUser");
+            document.getElementById("main-content").classList.add("hidden");
+            document.getElementById("auth-container").classList.remove("hidden");
         }
 
-        function updateUI() {
-            let username = localStorage.getItem("loggedUser");
-            let userInfo = document.querySelector(".user-info");
-            let saveButton = document.getElementById("save-button");
-            let editableContainer = document.getElementById("editable-container");
-
-            if (username) {
-                userInfo.textContent = `Вы вошли как ${username}`;
-                if (username === ADMIN_USER) {
-                    editableContainer.contentEditable = "true";
-                    saveButton.style.display = "block";
-                } else {
-                    editableContainer.contentEditable = "false";
-                    saveButton.style.display = "none";
-                }
-            } else {
-                userInfo.textContent = "Гость";
-                editableContainer.contentEditable = "false";
-                saveButton.style.display = "none";
-            }
-
-            // Загружаем сохранённый контент
-            let savedContent = localStorage.getItem("editableContent");
-            if (savedContent) {
-                editableContainer.innerHTML = savedContent;
-            }
+        function showMainContent() {
+            document.getElementById("auth-container").classList.add("hidden");
+            document.getElementById("main-content").classList.remove("hidden");
         }
-
-        function saveContent() {
-            let editableContainer = document.getElementById("editable-container");
-            localStorage.setItem("editableContent", editableContainer.innerHTML);
-            alert("Сохранено!");
-        }
-
-        function handleDrop(event) {
-            event.preventDefault();
-            let files = event.dataTransfer.files;
-            if (files.length > 0) {
-                let file = files[0];
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let img = document.createElement("img");
-                    img.src = e.target.result;
-                    document.getElementById("editable-container").appendChild(img);
-                    saveContent();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        updateUI();
     </script>
 
 </body>

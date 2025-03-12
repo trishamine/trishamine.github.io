@@ -5,146 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
     <style>
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 50px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .cssbuttons-io-button {
-            color: white;
-            font-family: inherit;
-            padding: 0.35em;
-            padding-left: 1.2em;
-            font-size: 17px;
-            font-weight: 500;
-            border-radius: 0.9em;
-            border: none;
-            letter-spacing: 0.05em;
+        /* Верхняя полоска */
+        .top-bar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-            height: 2.8em;
-            padding-right: 3.3em;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .top-bar .username {
+            font-size: 18px;
+        }
+
+        .top-bar button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
             cursor: pointer;
         }
 
-        .cssbuttons-io-button .icon {
+        /* Стили для попапов */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
-            margin-left: 1em;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 2.2em;
-            width: 2.2em;
-            border-radius: 0.7em;
-            right: 0.3em;
-            transition: all 0.3s;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
         }
 
-        .cssbuttons-io-button:hover .icon {
-            width: calc(100% - 0.6em);
+        .popup input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
         }
 
-        .cssbuttons-io-button .icon svg {
-            width: 1.1em;
-            transition: transform 0.3s;
+        .popup button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
         }
 
-        .cssbuttons-io-button:hover .icon svg {
-            transform: translateX(0.1em);
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
-
-        .cssbuttons-io-button:active .icon {
-            transform: scale(0.95);
-        }
-
-        .red { background: #d9534f; box-shadow: inset 0 0 1.6em -0.6em #a94442; }
-        .red .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #a94442; }
-        .red .icon svg { color: #a94442; }
-
-        .dark-purple { background: #6a0dad; box-shadow: inset 0 0 1.6em -0.6em #4b0082; }
-        .dark-purple .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #4b0082; }
-        .dark-purple .icon svg { color: #4b0082; }
-
-        .blue { background: #007bff; box-shadow: inset 0 0 1.6em -0.6em #0056b3; }
-        .blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #0056b3; }
-        .blue .icon svg { color: #0056b3; }
-
-        .light-blue { background: #5bc0de; box-shadow: inset 0 0 1.6em -0.6em #31b0d5; }
-        .light-blue .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #31b0d5; }
-        .light-blue .icon svg { color: #31b0d5; }
-
-        .gray { background: #6c757d; box-shadow: inset 0 0 1.6em -0.6em #545b62; }
-        .gray .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #545b62; }
-        .gray .icon svg { color: #545b62; }
-
-        .brown { background: #8b4513; box-shadow: inset 0 0 1.6em -0.6em #5a2c0d; }
-        .brown .icon { box-shadow: 0.1em 0.1em 0.6em 0.2em #5a2c0d; }
-        .brown .icon svg { color: #5a2c0d; }
     </style>
 </head>
 <body>
 
-    <div class="buttons">
-        <button class="cssbuttons-io-button red" onclick="window.open('https://trishamine.github.io/tytsub.html', '_blank')">
-            Ютуб
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button dark-purple" onclick="window.open('https://trishamine.github.io/tttsub.html', '_blank')">
-            Тикток
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button blue" onclick="window.open('https://trishamine.github.io/tdssrv.html', '_blank')">
-            Дискорд сервер
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button light-blue" onclick="window.open('https://trishamine.github.io/ttgchannel.html', '_blank')">
-            Телеграм канал
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button gray" onclick="alert('Triworld Лаунчер находится в разработке!')">
-            Triworld Лаунчер (В разработке)
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
-
-        <button class="cssbuttons-io-button brown" onclick="alert('Triworld SMP находится на техничетских работах, и будет доступен через 2-3 дня после выхода версии майнкрафта 1.21.5!')">
-            Triworld SMP (Тех. работы)
-            <div class="icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </button>
+    <!-- Верхняя полоска -->
+    <div class="top-bar">
+        <div class="username">Гость</div>
+        <button onclick="showLogin()">Войти</button>
     </div>
+
+    <!-- Попап входа -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="loginPopup">
+        <h2>Вход</h2>
+        <input type="text" id="loginUser" placeholder="Имя пользователя">
+        <input type="password" id="loginPass" placeholder="Пароль">
+        <button onclick="login()">Войти</button>
+        <p>Нет аккаунта? <a href="#" onclick="showRegister()">Зарегистрироваться</a></p>
+    </div>
+
+    <!-- Попап регистрации -->
+    <div class="popup" id="registerPopup">
+        <h2>Регистрация</h2>
+        <input type="text" id="regUser" placeholder="Имя пользователя">
+        <input type="password" id="regPass" placeholder="Пароль">
+        <input type="password" id="regPassRepeat" placeholder="Повторите пароль">
+        <button onclick="register()">Зарегистрироваться</button>
+    </div>
+
+    <script>
+        // Функции для открытия/закрытия попапов
+        function showLogin() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('loginPopup').style.display = 'block';
+        }
+
+        function showRegister() {
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('registerPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('registerPopup').style.display = 'none';
+        }
+
+        // Функция хеширования пароля
+        async function sha256(str) {
+            const buffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Функция регистрации
+        async function register() {
+            let user = document.getElementById('regUser').value;
+            let pass = document.getElementById('regPass').value;
+            let passRepeat = document.getElementById('regPassRepeat').value;
+
+            if (pass !== passRepeat) {
+                alert("Пароли не совпадают!");
+                return;
+            }
+
+            let hashedPass = await sha256(pass);
+            localStorage.setItem(user, hashedPass);
+            alert("Регистрация успешна! Теперь войдите.");
+            closePopup();
+        }
+
+        // Функция входа
+        async function login() {
+            let user = document.getElementById('loginUser').value;
+            let pass = document.getElementById('loginPass').value;
+            let hashedPass = await sha256(pass);
+
+            if (localStorage.getItem(user) === hashedPass) {
+                document.querySelector('.username').textContent = user;
+                alert("Вход выполнен!");
+                closePopup();
+            } else {
+                alert("Неверный логин или пароль!");
+            }
+        }
+    </script>
 
 </body>
 </html>

@@ -181,27 +181,28 @@
 
     <script>
         function parseMarkdown(text) {
-            // Заменяем звездочки для жирного текста
+            // Жирный текст **текст**
             text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Заменяем звездочки для текста в курсиве
+            // Курсив *текст*
             text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            // Возвращаем обработанный текст
+            // Markdown-ссылки [Текст](ссылка)
+            text = text.replace(/\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+            // Обычные ссылки (если просто написаны в тексте)
+            text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
             return text;
         }
 
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
-                // Применяем парсинг Markdown синтаксиса
                 const formattedText = parseMarkdown(data);
                 document.getElementById('news-text').innerHTML = formattedText;
             })
             .catch(error => {
                 console.error('Ошибка загрузки новости:', error);
                 document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
-              });
-</script>
-
+            });
+    </script>
 
 </body>
 </html>

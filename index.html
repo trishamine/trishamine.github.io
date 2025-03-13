@@ -115,6 +115,34 @@
             height: auto;
             margin-bottom: 15px;
         }
+        
+        /* Блок переключения языка */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .lang-btn:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -203,6 +231,12 @@
                 document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
             });
     </script>
+
+    <!-- Блок переключения языка -->
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="window.location.href='https://web.triworld.xyz'">Русский</button>
+        <button class="lang-btn" onclick="window.location.href='https://web.triworld.xyz/de.html'">Deutsch</button>
+    </div>
 
 </body>
 </html>

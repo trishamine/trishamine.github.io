@@ -204,7 +204,7 @@
 
     <div class="news-text">
         <img src="/newspic.png" alt="Новости">
-        <pre id="news-text">Nachrichten...</pre>
+        <pre id="news-text">Nachrichten laden...</pre>
     </div>
 
     <script>
@@ -220,7 +220,7 @@
             return text;
         }
 
-        fetch('/news.txt?' + new Date().getTime())
+        fetch('/denews.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
                 const formattedText = parseMarkdown(data);

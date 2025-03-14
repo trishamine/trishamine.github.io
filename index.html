@@ -167,8 +167,6 @@
             overflow-wrap: break-word;
             word-wrap: break-word;
             white-space: normal;
-            display: block !important; /* Убедимся, что не скрывается */
-            color: black; /* Если текст белый на белом фоне */
         }
     </style>
 </head>
@@ -229,11 +227,10 @@
         </button>
     </div>
 
-    <div class="news-text" id="loading">
+    <div class="news-text">
         <img src="/newspic.png" alt="Новости">
         <pre id="news-text">Загрузка новостей...</pre>
     </div>
-
 
     <script>
         function parseMarkdown(text) {
@@ -251,31 +248,13 @@
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
-                const newsElement = document.getElementById('news-text');
-                const loadingElement = document.querySelector('.news-text'); // Берем весь контейнер
-
-                if (newsElement) {
-                    if (data.trim() === '') {
-                        newsElement.innerHTML = 'Новостей нет.';
-                    } else {
-                        newsElement.innerHTML = parseMarkdown(data);
-                    }
-                }
-
-                // Оставляем контейнер, но убираем картинку
-                if (loadingElement) {
-                    const img = loadingElement.querySelector('img'); 
-                    if (img) img.style.display = 'none'; 
-                }
+                const formattedText = parseMarkdown(data);
+                document.getElementById('news-text').innerHTML = formattedText;
             })
             .catch(error => {
                 console.error('Ошибка загрузки новости:', error);
-                const newsElement = document.getElementById('news-text');
-                if (newsElement) {
-                    newsElement.textContent = 'Не удалось загрузить новости.';
-                }
+                document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
             });
-
     </script>
 
     <!-- Блок переключения языка -->

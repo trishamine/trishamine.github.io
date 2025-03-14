@@ -242,8 +242,14 @@
             text = text.replace(/\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
             // Обычные ссылки (если просто написаны в тексте)
             text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+            // Вставка изображений [image=ссылка]
+            text = text.replace(/\[image=(https?:\/\/[^\s\]]+)]/g, '<img src="$1" class="news-img">');
+            // Обработка переносов строк
+            text = text.replace(/\n/g, '<br>');
+    
             return text;
         }
+
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {

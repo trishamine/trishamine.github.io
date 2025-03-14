@@ -252,8 +252,8 @@
             .then(response => response.text())
             .then(data => {
                 const newsElement = document.getElementById('news-text');
-                const loadingElement = document.getElementById('loading');
-        
+                const loadingElement = document.querySelector('.news-text'); // Берем весь контейнер
+
                 if (newsElement) {
                     if (data.trim() === '') {
                         newsElement.innerHTML = 'Новостей нет.';
@@ -261,10 +261,11 @@
                         newsElement.innerHTML = parseMarkdown(data);
                     }
                 }
-        
-                // Скрываем контейнер загрузки
+
+                // Оставляем контейнер, но убираем картинку
                 if (loadingElement) {
-                    loadingElement.style.display = 'none';
+                    const img = loadingElement.querySelector('img'); 
+                    if (img) img.style.display = 'none'; 
                 }
             })
             .catch(error => {
@@ -274,8 +275,6 @@
                     newsElement.textContent = 'Не удалось загрузить новости.';
                 }
             });
-
-
 
     </script>
 

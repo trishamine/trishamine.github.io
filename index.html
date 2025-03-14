@@ -229,10 +229,11 @@
         </button>
     </div>
 
-    <div class="news-text">
+    <div class="news-text" id="loading">
         <img src="/newspic.png" alt="Новости">
         <pre id="news-text">Загрузка новостей...</pre>
     </div>
+
 
     <script>
         function parseMarkdown(text) {
@@ -250,15 +251,31 @@
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
-                const formattedText = parseMarkdown(data);
-                document.getElementById('news-text').innerHTML = formattedText;
-                document.getElementById('loading').style.display = 'none'; // Скрываем загрузку
+                const newsElement = document.getElementById('news-text');
+                const loadingElement = document.getElementById('loading');
+        
+                if (newsElement) {
+                    if (data.trim() === '') {
+                        newsElement.innerHTML = 'Новостей нет.';
+                    } else {
+                        newsElement.innerHTML = parseMarkdown(data);
+                    }
+                }
+        
+                // Скрываем контейнер загрузки
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
             })
             .catch(error => {
                 console.error('Ошибка загрузки новости:', error);
-                document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
-                document.getElementById('loading').style.display = 'none'; // Скрываем загрузку при ошибке
+                const newsElement = document.getElementById('news-text');
+                if (newsElement) {
+                    newsElement.textContent = 'Не удалось загрузить новости.';
+                }
             });
+
+
 
     </script>
 

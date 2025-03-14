@@ -261,30 +261,8 @@
     <div class="language-switcher">
         <button class="lang-btn" onclick="window.location.href='https://web.triworld.xyz'">Русский</button>
         <button class="lang-btn" onclick="window.location.href='https://web.triworld.xyz/de'">Deutsch</button>
+        <button class="lang-btn" onclick="window.location.href='https://web.triworld.xyz/en'">Englisch</button>
     </div>
-
-    <script>
-        function setLanguage(lang) {
-            localStorage.setItem('preferredLanguage', lang);
-            if (lang === 'ru') {
-                window.location.href = 'https://web.triworld.xyz';
-            } else if (lang === 'de') {
-                window.location.href = 'https://web.triworld.xyz/de';
-            }
-        }
-    
-        // Проверяем, есть ли сохранённый язык при загрузке
-        document.addEventListener("DOMContentLoaded", function () {
-            const savedLanguage = localStorage.getItem('preferredLanguage');
-            const currentURL = window.location.href;
-    
-            if (savedLanguage === 'de' && !currentURL.includes('/de')) {
-                window.location.href = 'https://web.triworld.xyz/de';
-            } else if (savedLanguage === 'ru' && currentURL.includes('/de')) {
-                window.location.href = 'https://web.triworld.xyz';
-            }
-        });
-    </script>
 
 </body>
 </html>

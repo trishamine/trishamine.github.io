@@ -143,31 +143,6 @@
         .lang-btn:hover {
             background: #0056b3;
         }
-
-        .news-text img {
-            width: 70%; /* Уменьшаем до 70% */
-            max-width: 400px; /* Максимальный размер */
-            height: auto;
-            display: block;
-            margin: 0 auto 15px; /* Центрируем */
-        }
-
-        .news-text {
-            width: 90%;
-            max-width: 600px;
-            margin: 30px auto;
-            overflow-wrap: break-word; /* Перенос слов */
-            word-wrap: break-word;
-            white-space: normal;
-        }
-
-        #news-text {
-            font-size: 1em;
-            text-align: center;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            white-space: normal;
-        }
     </style>
 </head>
 <body>
@@ -191,7 +166,7 @@
         </button>
 
         <button class="cssbuttons-io-button blue" onclick="window.open('https://web.triworld.xyz/tdssrv.html', '_blank')">
-            Дискордㅤㅤ
+            Дискорд серверㅤㅤ
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -209,7 +184,7 @@
         </button>
 
         <button class="cssbuttons-io-button gray" onclick="alert('Triworld Лаунчер находится в разработке!')">
-            Triworld Лаунчер (В разработке)ㅤㅤ
+            Triworld Launcher (в разработке)ㅤㅤ
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -218,7 +193,7 @@
         </button>
 
         <button class="cssbuttons-io-button brown" onclick="alert('Triworld SMP находится на техничетских работах, и будет доступен через 2-3 дня после выхода версии майнкрафта 1.21.5!')">
-            Triworld SMP (Тех. работы)ㅤㅤ
+            Triworld SMP (тех. работы)ㅤㅤ
             <div class="icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 17L14 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -244,6 +219,7 @@
             text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
             return text;
         }
+
         fetch('/news.txt?' + new Date().getTime())
             .then(response => response.text())
             .then(data => {
@@ -251,8 +227,8 @@
                 document.getElementById('news-text').innerHTML = formattedText;
             })
             .catch(error => {
-                console.error('Ошибка загрузки новости:', error);
-                document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
+                console.error('An error ocurred while loading news:', error);
+                document.getElementById('news-text').textContent = 'Unable to load news. Try to reload the page.';
             });
     </script>
 

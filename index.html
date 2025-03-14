@@ -250,11 +250,14 @@
             .then(data => {
                 const formattedText = parseMarkdown(data);
                 document.getElementById('news-text').innerHTML = formattedText;
+                document.getElementById('loading').style.display = 'none'; // Скрываем загрузку
             })
             .catch(error => {
                 console.error('Ошибка загрузки новости:', error);
                 document.getElementById('news-text').textContent = 'Не удалось загрузить новости.';
+                document.getElementById('loading').style.display = 'none'; // Скрываем загрузку при ошибке
             });
+
     </script>
 
     <!-- Блок переключения языка -->

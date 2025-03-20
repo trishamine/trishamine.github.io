@@ -31,12 +31,20 @@ while True:
 
     for i in range(MAX_STARS):
         star_radius,star_color,star_pos,star_expand,star_expand_speed=stars[i]
-
-    star_pos=(
-        star_pos[0]+random.randint(-1,1),
-        star_pos[1]+random.randint(-1,1)
-        )
-    stars[i]=(star_radius,star_color,star_pos,star_expand,star_expand_speed)
+        if star_expand:
+            star_radius+=star_expand_speed
+            if star_radius >= 5:
+                star_expand=False
+        else:
+            star_radius-=star_expand_speed
+            if star_radius <= 1:
+                star_expand=True
+        
+        star_pos=(
+            star_pos[0]+random.randint(-1,1),
+            star_pos[1]+random.randint(-1,1)
+            )
+        stars[i]=(star_radius,star_color,star_pos,star_expand,star_expand_speed)
 
     screen.fill((0,0,0))
     for star in stars:

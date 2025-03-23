@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        // Получаем параметры dm (домен) и args (путь)
+        const domain = getQueryParam("dm");
+        const path = getQueryParam("args");
+
+        // Проверяем, есть ли нужные параметры
+        if (domain && path) {
+            const url = "https://" + domain + path;
+            window.location.href = url;
+        } else {
+            document.write("<p>Ошибка: отсутствуют параметры dm или args.</p>");
+        }
+    </script>
+</head>
+<body>
+    <p>Если вас не перенаправило автоматически, нажмите <a id="redirect-link" href="#">здесь</a>.</p>
+    <script>
+        const link = document.getElementById("redirect-link");
+        if (domain && path) {
+            link.href = "https://" + domain + path;
+        }
+    </script>
+</body>
+</html>

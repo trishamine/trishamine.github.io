@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script>
+        // Функция для получения параметра id из URL
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        // Получаем значение переменной id
+        const videoId = getQueryParam("id");
+
+        // Проверяем, есть ли значение, и перенаправляем
+        if (videoId) {
+            window.location.href = "https://youtu.be/" + videoId;
+        } else {
+            document.write("<p>Ошибка: отсутствует параметр видео.</p>");
+        }
+    </script>
+</head>
+<body>
+    <p>Если вас не перенаправило автоматически, нажмите <a id="redirect-link" href="#">здесь</a>.</p>
+    <script>
+        const link = document.getElementById("redirect-link");
+        if (videoId) {
+            link.href = "https://youtu.be/" + videoId;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор ссылок</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, button { padding: 10px; font-size: 16px; margin: 10px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function generateLink() {
+            const inputUrl = document.getElementById("inputUrl").value.trim();
+            
+            try {
+                const url = new URL(inputUrl);
+                const domain = url.hostname;
+                const path = url.pathname + url.search + url.hash;
+
+                if (!domain || !path) {
+                    document.getElementById("result").innerText = "Ошибка: Неправильный формат ссылки.";
+                    return;
+                }
+
+                const redirectLink = `https://web.triworld.xyz/link?dm=${domain}&args=${encodeURIComponent(path)}`;
+                document.getElementById("result").innerHTML = `<a href="${redirectLink}" target="_blank">${redirectLink}</a>`;
+
+                // Автоматическое копирование ссылки
+                navigator.clipboard.writeText(redirectLink).then(() => {
+                    document.getElementById("copyStatus").innerText = "Скопировано!";
+                }).catch(() => {
+                    document.getElementById("copyStatus").innerText = "Не удалось скопировать.";
+                });
+
+            } catch (error) {
+                document.getElementById("result").innerText = "Ошибка: Введите корректную ссылку.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Генератор ссылок</h2>
+    <p>Введите полную ссылку:</p>
+    <input type="text" id="inputUrl" placeholder="https://example.com/website.html" size="40">
+    <button onclick="generateLink()">Сгенерировать</button>
+    
+    <div id="result"></div>
+    <p id="copyStatus"></p>
+</body>
+</html>

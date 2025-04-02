@@ -16,7 +16,7 @@
 
         // Проверяем, есть ли значение, и перенаправляем
         if (videoId) {
-            window.location.href = "https://youtu.be/" + videoId;
+            window.location.href = "https://youtube.com/shorts/" + videoId;
         } else {
             document.write("<p>Отсуствует аргумент «?id=» </p>");
         }
@@ -27,7 +27,7 @@
     <script>
         const link = document.getElementById("redirect-link");
         if (videoId) {
-            link.href = "https://youtu.be/" + videoId;
+            link.href = "https://youtube.com/shorts/" + videoId;
         }
     </script>
 </body>
